@@ -27,6 +27,11 @@ export class TypesController {
     return this.typesService.getTypes(query);
   }
 
+  @Get('all')
+  find() {
+    return this.typesService.findAll();
+  }
+
   @Get(':slug')
   getTypeBySlug(@Param('slug') slug: string) {
     return this.typesService.getTypeBySlug(slug);

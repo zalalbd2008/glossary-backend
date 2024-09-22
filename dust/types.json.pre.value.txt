@@ -1,4 +1,3 @@
-[
   {
     "id": 1,
     "name": "Grocery",
@@ -452,4 +451,3 @@
     },
     "icon": "MedicineIcon"
   }
-]

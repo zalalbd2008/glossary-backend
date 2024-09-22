@@ -5,25 +5,27 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import * as os from 'os';
 
-if (cluster.isPrimary) {
-  // Use cluster.isPrimary in newer Node.js versions
-  const numCPUs = os.cpus().length;
-  console.log(`Primary ${process.pid} is running`);
+// if (cluster.isPrimary) {
+//   // Use cluster.isPrimary in newer Node.js versions
+//   const numCPUs = os.cpus().length;
+//   console.log(`Primary ${process.pid} is running`);
 
-  // Fork workers.
-  for (let i = 0; i < numCPUs; i++) {
-    cluster.fork();
-  }
+//   // Fork workers.
+//   for (let i = 0; i < numCPUs; i++) {
+//     cluster.fork();
+//   }
 
-  cluster.on('exit', (worker, code, signal) => {
-    console.log(`Worker ${worker.process.pid} died`);
-    cluster.fork(); // Restart the worker when it exits
-  });
-} else {
+//   cluster.on('exit', (worker, code, signal) => {
+//     console.log(`Worker ${worker.process.pid} died`);
+//     cluster.fork(); // Restart the worker when it exits
+//   });
+// } else {
+
+// }
+
   async function bootstrap() {
     const app = await NestFactory.create(AppModule, { cors: true });
 
-    
     app.setGlobalPrefix('api');
     app.useGlobalPipes(new ValidationPipe());
     const config = new DocumentBuilder()
@@ -41,5 +43,4 @@ if (cluster.isPrimary) {
     await app.listen(PORT);
     console.log(`Application is running on: ${await app.getUrl()}/api`);
   }
-  bootstrap();
-}
+bootstrap();
