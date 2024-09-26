@@ -48,4 +48,4 @@ export class TypeAll {
   shop_link?: string;
   shop_name?: string;
   shop_id?: number;
-}
+}[]
